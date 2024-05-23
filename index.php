@@ -147,7 +147,7 @@
 
       <div class="nav">
         <a href=""> LAST </a>
-        <a href="">NEXT</a> 
+        <a href=""> NEXT </a> 
       </div>
 
     </div>
