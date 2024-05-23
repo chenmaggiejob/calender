@@ -63,14 +63,7 @@
       align-items: center;
       margin: auto;
     }
-
-    button {
-      width: 100px;
-      height: 30px;
-      border: none;
-
-    }
-
+    
     .holiday {
       background-color: lightpink;
     }
