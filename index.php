@@ -25,6 +25,8 @@
       width: 30%;
       /* height: 100%; */
       background-color: black;
+      display: flex;
+      flex-direction: column;
     }
 
     .contentR {
@@ -35,7 +37,7 @@
       flex-wrap: wrap;
     }
 
-    .title,
+    .weektitle,
     .item {
       width: 14%;
       height: 45px;
@@ -44,6 +46,28 @@
       justify-content: center;
       align-items: center;
       border: 1px solid black;
+    }
+
+    .ymtitle {
+      width: 100%;
+      height: 10%;
+      background-color: lightblue;
+    }
+
+    .nav {
+      width: 100%;
+      height: 10%;
+      /* background-color: lightgoldenrodyellow; */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto;
+    }
+
+    button {
+      width: 100px;
+      height: 30px;
+      border: none;
 
     }
 
@@ -62,7 +86,7 @@
   $year = $_GET['year'] ?? date('Y');
 
   //取得當月1號的日期
-  $firstday = date("$year-$month-01");
+  $firstday = date("$year-$month-1");
 
   //在將當月1號的日期格式轉成時間戳
   $firstday_stemp = strtotime($firstday);
@@ -85,7 +109,33 @@
   //月份的最大週數為6週，6*7=42所以i值設定<42
   for ($i = 0; $i < 42; $i++) {
     $diff = $i - $firstWeekStartDay;
-    $days[] = date("Y-m-d", strtotime("$diff day", $firstday_stemp));
+    $days[] = date("Y-m-j", strtotime("$diff day", $firstday_stemp));
+  }
+
+  /*上個月的月份判斷
+  當月份-1<1，是去年的12月，月份為12，年份-1
+  如果
+  當月份-1<1，是當年的月份+1
+  */
+  if ($month - 1 < 1) {
+    $last_month = 12;
+    $last_year = $year - 1;
+  } else {
+    $last_month = $month - 1;
+    $last_year = $year;
+  }
+
+  /* 下個月的月份判斷
+  當月份＋1>12，就是來年的月份，月份即為1月，年份+1
+  如果
+  當月份＋1<12，就是當年的月份+1
+  */
+  if ($month + 1 > 12) {
+    $next_month = 1;
+    $next_year = $year + 1;
+  } else {
+    $next_month = $month + 1;
+    $next_year = $year;
   }
 
   // echo "<pre>";
@@ -98,13 +148,22 @@
   <div class="container">
     <div class="contentL">
 
+      <div class="ymtitle">
+        year month
+      </div>
+
+      <div class="nav">
+        <a href=""> LAST </a>
+        <a href="">NEXT</a> 
+      </div>
+
     </div>
     <div class="contentR">
       <?php
       $str = "日 一 二 三 四 五 六";
-      $title = explode(" ", $str);
-      foreach ($title as $a) {
-        echo "<div class='title'> $a </div>";
+      $weektitle = explode(" ", $str);
+      foreach ($weektitle as $w) {
+        echo "<div class='weektitle'> $w </div>";
       }
 
       foreach ($days as $day) {
@@ -118,10 +177,10 @@
       }
 
 
-
-
       ?>
+
     </div>
+
   </div>
 
   <?php
