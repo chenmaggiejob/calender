@@ -17,7 +17,7 @@
       width: 80%;
       /* height: 300px; */
       margin: auto;
-      background-color: lightcoral;
+      /* background-color: lightcoral; */
       display: flex;
     }
 
@@ -32,7 +32,7 @@
     .contentR {
       width: 70%;
       /* height: 100%; */
-      background-color: lightgray;
+      /* background-color: lightgray; */
       display: flex;
       flex-wrap: wrap;
     }
@@ -63,9 +63,18 @@
       align-items: center;
       margin: auto;
     }
-    
+
+    .gray.holiday {
+      color: gray;
+      background-color: lightpink;
+    }
+
     .holiday {
       background-color: lightpink;
+    }
+
+    .gray {
+      color: gray;
     }
   </style>
 </head>
@@ -79,7 +88,7 @@
   $year = $_GET['year'] ?? date('Y');
 
   //取得當月1號的日期
-  $firstday = date("$year-$month-1");
+  $firstday = date("$year-$month-01");
 
   //在將當月1號的日期格式轉成時間戳
   $firstday_stemp = strtotime($firstday);
@@ -111,11 +120,11 @@
   當月份-1<1，是當年的月份+1
   */
   if ($month - 1 < 1) {
-    $last_month = 12;
-    $last_year = $year - 1;
+    $prev_month = 12;
+    $prev_year = $year - 1;
   } else {
-    $last_month = $month - 1;
-    $last_year = $year;
+    $prev_month = $month - 1;
+    $prev_year = $year;
   }
 
   /* 下個月的月份判斷
@@ -142,12 +151,12 @@
     <div class="contentL">
 
       <div class="ymtitle">
-        year month
+        <?= $year; ?>年 <?= $month; ?>月
       </div>
 
       <div class="nav">
-        <a href=""> LAST </a>
-        <a href=""> NEXT </a> 
+        <a href="?year=<?= $prev_year; ?>&month=<?= $prev_month ?>"> LAST </a>
+        <a href="?year=<?= $next_year; ?>&month=<?= $next_month ?>"> NEXT </a>
       </div>
 
     </div>
@@ -155,19 +164,34 @@
       <?php
       $str = "日 一 二 三 四 五 六";
       $weektitle = explode(" ", $str);
-      foreach ($weektitle as $w) {
-        echo "<div class='weektitle'> $w </div>";
+      foreach ($weektitle as $weekstr) {
+        echo "<div class='weektitle'> $weekstr </div>";
       }
 
       foreach ($days as $day) {
+        $day_timestamp = strtotime($day); // 將日期轉換為時間戳
+        $current_month = date("m", $day_timestamp); // 從時間戳中獲取月份
         $date = explode("-", $day)[2];
         $whatDay = date("w", strtotime($day)); //判斷是否為六日
-        if ($whatDay == 0 || $whatDay == 6) {
-          echo "<div class='item holiday'> $date </div>";
-        } else {
-          echo "<div class ='item'> $date </div>";
+
+        // 如果不是當月份的日期，日期則反灰
+        if ($current_month != $month) {
+          // 如果是六日，文字反灰，背景顏色保留
+          if ($whatDay == 0 || $whatDay == 6) {
+            echo "<div class='item holiday gray'> $date </div>";
+          } else {
+            echo "<div class='item gray'> $date </div>";
+          } 
+          } elseif ($whatDay == 0 || $whatDay == 6) {
+            echo "<div class='item holiday'> $date </div>";
+          } else {
+            echo "<div class='item'> $date </div>";
+          }
         }
-      }
+
+
+          
+
 
 
       ?>
