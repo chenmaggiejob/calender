@@ -51,7 +51,9 @@
     .ymtitle {
       width: 100%;
       height: 10%;
-      background-color: lightblue;
+      background-color: rgb(129, 216, 207);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
     }
 
     .nav {
