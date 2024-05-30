@@ -10,69 +10,70 @@
   <style>
     * {
       box-sizing: border-box;
-      border-collapse: collapse;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     .container {
       width: 80%;
-      /* height: 300px; */
       margin: auto;
-      /* background-color: lightcoral; */
       display: flex;
     }
 
     .contentL {
       width: 30%;
-      /* height: 100%; */
-      background-color: black;
+      background-color: #7FD4CE;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .contentR {
       width: 70%;
-      /* height: 100%; */
-      /* background-color: lightgray; */
       display: flex;
       flex-wrap: wrap;
     }
 
     .weektitle,
     .item {
-      width: 14%;
-      height: 45px;
-      margin: auto;
+      width: calc(100% / 7);
+      height: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid black;
     }
 
     .ymtitle {
       width: 100%;
       height: 10%;
-      background-color: rgb(129, 216, 207);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #7FD4CE;
       color: white;
+      font-size: 20px;
+      text-align: center;
+      padding: 10px 0;
     }
 
     .nav {
       width: 100%;
       height: 10%;
-      /* background-color: lightgoldenrodyellow; */
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: auto;
+      padding: 0 10px;
     }
 
     .gray.holiday {
       color: gray;
-      background-color: lightpink;
+      background-color: white;
     }
 
     .holiday {
-      background-color: lightpink;
+      background-color: white;
     }
 
     .gray {
@@ -190,24 +191,12 @@
             echo "<div class='item'> $date </div>";
           }
         }
-
-
-          
-
-
-
       ?>
 
     </div>
 
   </div>
 
-  <?php
-
-
-
-  ?>
-
-</body>
+ </body>
 
 </html>
